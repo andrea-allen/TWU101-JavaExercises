@@ -4,8 +4,17 @@ package com.thoughtworks.tw101.exercises.exercise1;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("testing");
+        int sum=0;
+        for (int i=0; i<100; i++){
+            if (i%2>0){
+                System.out.print(i);
+                sum=sum+i;
+                System.out.println("");
+                System.out.print(new StringBuilder().append("Sum is ").append(sum).toString());
+                System.out.println();
+            }
         }
+
     }
 }
 
