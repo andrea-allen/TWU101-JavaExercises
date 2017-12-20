@@ -1,6 +1,6 @@
 package com.thoughtworks.tw101.exercises.exercise9;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Node {
     private String name;
@@ -18,7 +18,7 @@ public class Node {
     }
 
     public void add(String nameOfNewNode) {
-        System.out.println("Adding "+nameOfNewNode);
+        //System.out.println("Adding "+nameOfNewNode);
 
         //case where we get to the bottom of the tree
         if(this==null) {
@@ -29,34 +29,52 @@ public class Node {
             if (nameOfNewNode.compareTo(this.name)<0){
                 if(this.left==null){
                     this.left=new Node(nameOfNewNode);
-                    System.out.println("left was null for "+this.name);
+                    //System.out.println("left was null for "+this.name);
                 }
                 else {
                     this.left.add(nameOfNewNode);
-                    System.out.println("recursed left on "+this.name);
+                    //System.out.println("recursed left on "+this.name);
                 }
             }
             if(nameOfNewNode.compareTo(this.name)>0){
                 if(this.right==null){
                     this.right=new Node(nameOfNewNode);
-                    System.out.println("right was null for "+this.name);
+                    //System.out.println("right was null for "+this.name);
                 }
                 else {
                     this.right.add(nameOfNewNode);
-                    System.out.println("recursed right on "+this.name);
+                    //System.out.println("recursed right on "+this.name);
                 }
             }
 
         }
 
-        System.out.println("Added node " +nameOfNewNode + " to "+this.name);
+        //System.out.println("Added node " +nameOfNewNode + " to "+this.name);
 
     }
 
 
 
-    public List<String> names() {
+    public ArrayList<String> names() {
         //use an Inorder traversal
-        return null;
+        ArrayList<String> names = new ArrayList<String>();
+        this.inOrder(names);
+
+        return names;
+    }
+
+    //helper function
+    public void inOrder(ArrayList<String> names){
+
+        //left node
+        if(this.left!=null){
+            this.left.inOrder(names);
+        }
+        //node
+        names.add(this.name);
+
+        //right node
+        if(this.right!=null){
+            this.right.inOrder(names);}
     }
 }
