@@ -14,24 +14,32 @@ public class Game {
     //Constructor
     public Game(){
         this.hasWon=false;
-        this.randomNumber=Math.round((Math.random())*100); //number formatting
+        this.randomNumber=Math.round((Math.random())*100);
         this.guesses=new ArrayList<Integer>();
     }
 
-    public void play() {
+    public void play() throws NumberFormatException{
         while (this.hasWon == false) {
-            Scanner sc = new Scanner(System.in); //number formatting, parseInt, and add an error if a user types text
-            int i = sc.nextInt(); //make sure to parseInt
+            Scanner sc = new Scanner(System.in);
+            try{
+                int i = Integer.parseInt(sc.next());
 
-            //INCOMPLETE: handle EXCEPTION for user String input
+                Guess guess = new Guess(i);
 
-            Guess guess = new Guess(i);
+                guesses.add(i);
 
-            guesses.add(i);
+                guess.check(randomNumber);
 
-            guess.check(randomNumber);
+                this.hasWon=guess.isRight;
 
-            this.hasWon=guess.isRight;
+
+            }
+            catch ( NumberFormatException ex) {
+                System.out.println("That's not an integer! Try again.");
+                continue;
+            }
+
+
         }
 
         System.out.print(guesses);
